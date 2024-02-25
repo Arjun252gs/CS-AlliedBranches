@@ -8,7 +8,9 @@ Setup commands -
 2. eval "$(ssh-agent -s)"
 3. ssh-add ~/.ssh/id_ed25519
 4. cat ~/.ssh/id_ed25519.pub
-**Program 1 - 
+
+
+# Program 1 - 
 Commands list - mkdir, cd, touch
 1. git init
 2. git status
@@ -63,7 +65,7 @@ Date:   Thu Jan 11 15:31:23 2024 +0530
 
     a.c file created
 
-**Program 2 - ** Program 1 commands ( mkdir, cd, touch. git init, git status, git add ., git commit -m "a.c file created", git log) + git branch, git branch feature, git checkout feature, git merge feature
+# Program 2 -  Program 1 commands ( mkdir, cd, touch. git init, git status, git add ., git commit -m "a.c file created", git log) + git branch, git branch feature, git checkout feature, git merge feature
 Run program 1 and then run these commands - 
 
 atme@atme-HP-280-Pro-G6-Microtower-PC:~/ci046/folder1$ git branch
