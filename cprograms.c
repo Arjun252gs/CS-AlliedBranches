@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main()
 {
-    char name[20];
-    scanf("%s", name);
-    printf("Hello, %s!", name);
+    int age;
+    scanf("%d", &age);
+    printf("User age is %d", age);
 }
