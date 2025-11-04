@@ -128,7 +128,30 @@ int main()
 } // Refer - https://onecompiler.com/c/442uryfpw
 
 //Program - 5 : Question - Develop a program to find key elements in an array using linear search.
+ #include<stdio.h>
+int main()
+{	
+  	int arr[5];
+  	int i, key;
+  	int flag =0;
+   	printf("Enter the array elements:\n"); 
+  	for(i=0; i<5; i++)
+  		scanf("%d",&arr[i]);
+	
+  	printf("Enter the key to be searched:\n"); 
+  	scanf("%d",&key);
 
+  	for(i=0; i<5; i++)	{
+  		if(key==arr[i])	{
+  			flag = 1;
+  			printf("Key searched Sucessfully at position %d", i+1);
+  			break;
+  		} 
+  	}
+  	if(flag == 0)
+  		printf("Key not found ");  		
+  	return 0;
+}
 
 //Program - 7 : Question - Develop a program to concatenate two strings, find length of a string and copy one string to other using string operations.
 #include <stdio.h>
