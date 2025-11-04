@@ -53,6 +53,37 @@ int main()
 	    printf("Invalid Age\n");
     return 0;
 } //Refer - https://onecompiler.com/c/43zt2jcet
+//--------------------------------------------------------------OR - Alterantively 
+#include<stdio.h>
+int main()
+{	
+    int age;
+    char gender;
+    printf("Enter the gender and the age:");
+    scanf("%c%d",&gender,&age);
+	
+    if(age>=60){
+        printf("Senior ");	
+		goto agecheck;
+    }
+    else if(age>0){
+		printf("Normal ");
+		goto agecheck;		
+    }
+    else 
+	    printf("Invalid Age\n");
+	
+	return 0;
+	
+	agecheck : switch(gender){
+		case 'M': 
+		case 'm': printf(" Male citizen"); break;
+		case 'F': 
+		case 'f': printf(" Female citizen"); break;
+		default : printf("But invalid Gender\n");
+	}
+	
+} // https://onecompiler.com/c/443nhp6qz
 
 //Program - 3 : Question - Develop a program to find the sum of digits of a given number.
 
@@ -99,10 +130,28 @@ int main()
 //Program - 5 : Question - Develop a program to find key elements in an array using linear search.
 
 
-//Program - 6 : Question - Develop a program to find the roots of quadratic equations.
+//Program - 7 : Question - Develop a program to concatenate two strings, find length of a string and copy one string to other using string operations.
+#include <stdio.h>
+#include <string.h> 
+int main()
+{
+	char fname[20], lname[20];
+	char fullname[50];
+	int len;
+	printf("Enter your First name and Last name::\n");
+	scanf("%s%s",fname,lname);
 
-//Program - 7 : Question - Develop a program to concatenate two strings, find length of a string and copy one string to other
-using string operations.
+	strcpy(fullname, fname); 
+	printf("Fname %s is copied to Fullname %s", fname, fullname);
+
+	strcat(fullname, lname); 
+	printf("Lname %s is concatinated to Fullname %s", lname, fullname);
+
+	len = strlen(fullname);
+	printf("Length of %s is %d", fullname,len); 
+	return 0;
+}
+//Program - 7 : Question - Develop a program to find the roots of quadratic equations.
 
 //Program - 8 : Question - Develop a program to find whether a given number is prime or not.
 //Program - 9 : Question - Develop a modular program to find GCD and LCM of given numbers
