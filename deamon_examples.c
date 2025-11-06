@@ -47,3 +47,71 @@ int main() {
     create_daemon();
     return 0;
 }
+//-------------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <time.h>
+#include <fcntl.h>
+   int main()
+   {	
+	while (1) {
+        	time_t now = time(NULL);
+		char *time_str = ctime(&now);
+        	printf("Active at: %s", time_str);
+        	sleep(5);
+    	}
+
+	return 0;
+    }
+//--------------------------------
+int main()
+   {	
+	FILE *fp = fopen("/tmp/my_log.txt", "w");
+	while (1) {
+        	time_t now = time(NULL);
+		char *time_str = ctime(&now);
+        	fprintf(fp, "Active at: %s", time_str);
+        	sleep(5);
+    	}
+	fclose(fp);
+	return 0;
+    }
+//-------------------------------------------
+int main()
+   {	
+	FILE *fp = fopen("/tmp/my_log.txt", "w");
+	int i=1;
+	while (i<100) {
+        	time_t now = time(NULL);
+		char *time_str = ctime(&now);
+        	fprintf(fp, "Active at: %s", time_str);
+        	sleep(5);
+		i++;
+    	}
+	if(i==100)
+		exit(0);
+	return 0;
+    }
+//---------------------------------------------
+int main()
+   {	
+	FILE *fp = fopen("/tmp/my_log.txt", "w");
+	int i=1;
+	while (i<100) {
+        	time_t now = time(NULL);
+		char *time_str = ctime(&now);
+        	fprintf(fp, "Active at: %s", time_str);
+        	sleep(5);
+		i++;
+    	}
+	if(i==100){
+		fclose(fp);
+		_Exit(0);
+	}
+	return 0;
+    }
+//-------------------------------------------------
+//- 
