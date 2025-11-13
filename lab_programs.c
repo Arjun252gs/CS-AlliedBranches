@@ -153,7 +153,7 @@ int main()
   	return 0;
 }
 
-//Program - 7 : Question - Develop a program to concatenate two strings, find length of a string and copy one string to other using string operations.
+//Program - 6 : Question - Develop a program to concatenate two strings, find length of a string and copy one string to other using string operations.
 #include <stdio.h>
 #include <string.h> 
 int main()
