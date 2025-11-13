@@ -175,6 +175,32 @@ int main()
 	return 0;
 }
 //Program - 7 : Question - Develop a program to find the roots of quadratic equations.
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+	float a, b, c, root1, root2, disc, real, imag;
+	printf("Enter coefficients of quadratic equation (a, b, c): \n");
+	scanf("%f %f %f", &a, &b, &c);
+	// Quadratic equation
+	disc = b * b - 4 * a * c;
+	printf("Discriminant = %.2f\n", disc);
+	if (disc > 0)	{
+		root1 = (-b + sqrt(disc)) / (2 * a);
+		root2 = (-b - sqrt(disc)) / (2 * a);
+		printf("Two distinct real roots: %.2f and %.2f\n", root1, root2);
+	}
+	else if (disc == 0)	{
+		root1 = -b / (2 * a);
+		printf("One real root: %.2f\n", root1);
+	}
+	else	{
+		real = -b / (2 * a);
+		imag = sqrt(-disc) / (2 * a);
+		printf("Complex roots: %.2f + %.2fi and %.2f - %.2fi\n", real, imag, real, imag);
+	}
+	return 0;
+} // https://onecompiler.com/c/444hyg2n3
 
 //Program - 8 : Question - Develop a program to find whether a given number is prime or not.
 //Program - 9 : Question - Develop a modular program to find GCD and LCM of given numbers
