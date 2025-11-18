@@ -220,9 +220,80 @@ int main() {
     return 0;
 }
 //Program - 11 : Question - Develop a program to find the transpose of a matrix.
+#include<stdio.h>
+int main()
+{	
+  	int rows, columns;
+	int matrix[5][5], transpose[5][5];
+  	int i,j,k=1;
+  	printf("Enter the number:\n");
+  	scanf("%d%d",&rows, &columns);
+  	for(i=0; i<rows; i++)   // Reading a matrix
+  	{
+    		for(j=0; j<columns; j++)  
+    			scanf("%d", &matrix[i][j]); 		 
+  	} 
+	for(i=0; i<rows; i++)    // transpose of the matrix
+  	{
+    		for(j=0; j<columns; j++)  
+    		{
+			transpose[j][i] = matrix[i][j];
+		}
+	}
+	  printf("original matrix is:\n");
+		for(i=0; i<rows; i++)// Printing the original matrix
+  	{
+    		for(j=0; j<columns; j++)
+    			printf("%d\t", matrix[i][j]);
+    		printf("\n");
+  	}
+  	  printf("transpose matrix is:\n");
+	for(i=0; i<rows; i++)// Printing the transpose matrix
+  	{
+    		for(j=0; j<columns; j++)
+    			printf("%d\t", transpose[i][j]);
+    		printf("\n");
+  	}
+  	return 0;
+} // https://onecompiler.com/c/444yxqdts
 //Program - 12 : Question - Develop a program to perform Matrix Multiplication.
-//Program - 13 : Question - Develop a program to declare the structure of employees and display the employee records with
-higher salary among two employees.
-//Program - 14 : Question - Develop a program to create an array of structures to store book details and check whether a specific
-book, as requested by the user, is available or not.
+//Program - 13 : Question - Develop a program to declare the structure of employees and display the employee records with higher salary among two employees.
+//Program - 14 : Question - Develop a program to create an array of structures to store book details and check whether a specific book, as requested by the user, is available or not.
 
+//Program - Addition and subtraction of 2 matrix
+#include<stdio.h>
+int main()
+{	
+  	int rows, columns;
+	int matrix1[5][5], matrix2[5][5], sum[5][5], diff[5][5];
+  	int i,j,k=1;
+  	printf("Enter the number:\n");
+  	scanf("%d%d",&rows, &columns);
+  	for(i=0; i<rows; i++)   // Reading a matrix
+  	{
+    		for(j=0; j<columns; j++)  
+    			scanf("%d", &matrix1[i][j]) 		 
+  	} 
+	for(i=0; i<rows; i++)   // Reading a matrix
+  	{
+    		for(j=0; j<columns; j++)  
+    			scanf("%d", &matrix2[i][j]) 		 
+  	}
+	for(i=0; i<rows; i++)    // adding 2 matix
+  	{
+    		for(j=0; j<columns; j++)  
+    		{
+			sum[i][j] = matrix1[i][j] + matrix2[i][j];
+			diff[i][j] = matrix1[i][j] - matrix2[i][j];
+		}
+	}
+	for(i=1; i<=rows; i++)// Printing a matrix
+  	{
+    		for(j=1; j<=columns; j++)
+    			printf("%d\t", sum[i][j]);
+    		printf("\n");
+  	}
+	
+
+  	return 0;
+}
