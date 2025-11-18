@@ -272,12 +272,12 @@ int main()
   	for(i=0; i<rows; i++)   // Reading a matrix
   	{
     		for(j=0; j<columns; j++)  
-    			scanf("%d", &matrix1[i][j]) 		 
+    			scanf("%d", &matrix1[i][j]); 		 
   	} 
 	for(i=0; i<rows; i++)   // Reading a matrix
   	{
     		for(j=0; j<columns; j++)  
-    			scanf("%d", &matrix2[i][j]) 		 
+    			scanf("%d", &matrix2[i][j]); 		 
   	}
 	for(i=0; i<rows; i++)    // adding 2 matix
   	{
@@ -287,13 +287,34 @@ int main()
 			diff[i][j] = matrix1[i][j] - matrix2[i][j];
 		}
 	}
-	for(i=1; i<=rows; i++)// Printing a matrix
+	printf("original matrix 1 is:\n");
+		for(i=0; i<rows; i++)// Printing the original matrix
   	{
-    		for(j=1; j<=columns; j++)
+    		for(j=0; j<columns; j++)
+    			printf("%d\t", matrix1[i][j]);
+    		printf("\n");
+  	}
+  	printf("original matrix 2 is:\n");
+		for(i=0; i<rows; i++)// Printing the original matrix
+  	{
+    		for(j=0; j<columns; j++)
+    			printf("%d\t", matrix2[i][j]);
+    		printf("\n");
+  	}
+  	printf("Sum matrix is:\n");
+	for(i=0; i<rows; i++)// Printing a Sum
+  	{
+    		for(j=0; j<columns; j++)
     			printf("%d\t", sum[i][j]);
     		printf("\n");
   	}
-	
+  	printf("Diff matrix is:\n");
+	for(i=0; i<rows; i++)// Printing a Diff
+  	{
+    		for(j=0; j<columns; j++)
+    			printf("%d\t", diff[i][j]);
+    		printf("\n");
+  	}
 
   	return 0;
-}
+} // https://onecompiler.com/c/444yy525h
