@@ -205,6 +205,20 @@ int main()
 //Program - 8 : Question - Develop a program to find whether a given number is prime or not.
 //Program - 9 : Question - Develop a modular program to find GCD and LCM of given numbers
 //Program - 10 : Question - Develop a program to add two numbers using the pointers to the variables.
+#include <stdio.h>
+int add(int *a, int *b) {
+	return *a +*b;
+}
+int main() {
+    int a, b, sum = 0; 
+    printf("Enter two integers: ");
+    scanf("%d%d", &a, &b);
+
+    sum = add(&a,&b);
+
+    printf("Sum: %d", sum);
+    return 0;
+}
 //Program - 11 : Question - Develop a program to find the transpose of a matrix.
 //Program - 12 : Question - Develop a program to perform Matrix Multiplication.
 //Program - 13 : Question - Develop a program to declare the structure of employees and display the employee records with
