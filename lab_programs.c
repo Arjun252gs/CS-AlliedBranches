@@ -204,6 +204,34 @@ int main()
 
 //Program - 8 : Question - Develop a program to find whether a given number is prime or not.
 //Program - 9 : Question - Develop a modular program to find GCD and LCM of given numbers
+#include <stdio.h>
+int find_gcd(int a, int b) {
+    int remainder;
+    while (b != 0) {
+        remainder = a % b;
+        a = b;         // The divisor becomes the new numerator
+        b = remainder; // The remainder becomes the new divisor
+    }
+    return a;
+}
+int find_lcm(int a, int b) {
+    int gcd = find_gcd(a, b);
+    int product = a * b;
+    return product / gcd;
+}
+int main()
+{
+    int num1, num2, gcd_result, lcm_result;
+    printf("Enter two numbers:\n");
+    scanf("%d %d", &num1, &num2); 
+    gcd_result = find_gcd(num1, num2);
+    lcm_result = find_lcm(num1, num2);
+
+    printf("GCD of %d and %d = %d\n", num1, num2, gcd_result);
+    printf("LCM of %d and %d = %d\n", num1, num2, lcm_result);
+    return 0; 
+}
+
 //Program - 10 : Question - Develop a program to add two numbers using the pointers to the variables.
 #include <stdio.h>
 int add(int *a, int *b) {
