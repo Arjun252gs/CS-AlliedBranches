@@ -230,7 +230,7 @@ int main()
     printf("GCD of %d and %d = %d\n", num1, num2, gcd_result);
     printf("LCM of %d and %d = %d\n", num1, num2, lcm_result);
     return 0; 
-}
+} // https://onecompiler.com/c/445mgntet
 
 //Program - 10 : Question - Develop a program to add two numbers using the pointers to the variables.
 #include <stdio.h>
