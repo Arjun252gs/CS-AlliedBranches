@@ -6,6 +6,7 @@ int main() {
     scanf("%f", &cel);
     far=cel*9/5+32;
     printf("Fahrenheit value is %f\n", far);
+	return 0;
 } //https://onecompiler.com/c/445pmy48z
 //Program - 2 : Question - Given age and gender of a person, develop a program to categorise senior citizen (male & female).
 #include<stdio.h>
