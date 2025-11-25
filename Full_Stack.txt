@@ -1,0 +1,573 @@
+Program 3: - Develop a Django app that displays current date and time in server
+To create a Django app that displays the current date and time from the server, follow these steps: 
+
+Create a Django Project using the following command: 
+
+django-admin startproject myproject 
+ 
+Create a Django App: Inside your project directory, create a Django app using the following command: 
+
+python manage.py startapp myapp 
+ 
+
+Define a View Function: Open the views.py file in your app directory (myapp/views.py) and define a view function to handle the request and return the current date and time. 
+Use Python's datetime module for this: 
+
+python 
+
+from django.http import HttpResponse 
+from datetime import datetime 
+ 
+def current_datetime(request): 
+    now = datetime.now() 
+    html = "<html><body>Current date and time: {0}</body></html>".format(now) 
+    return HttpResponse(html) 
+ 
+
+Map URL to View: Next, map the URL to the view function you just created. Open the urls.py file in your app directory (myapp/urls.py) and define a URL pattern: 
+
+python 
+
+from django.urls import path 
+from . import views 
+ 
+urlpatterns = [ 
+    path('current_datetime/', views.current_datetime, name='current_datetime'), 
+] 
+ 
+
+Configure URL Mapping: Include the URL configuration of your app in the project's URL configuration. 
+Open the urls.py file in your project directory (myproject/urls.py) and include the URL pattern of your app: 
+
+python 
+
+from django.contrib import admin 
+from django.urls import path, include 
+ 
+urlpatterns = [ 
+    path('admin/', admin.site.urls), 
+    path('myapp/', include('myapp.urls')), 
+] 
+ 
+
+Run the Server: Start the Django development server using the following command: 
+
+python manage.py runserver 
+ 
+
+Access the Page: Open a web browser and navigate to http://127.0.0.1:8000/myapp/current_datetime/ to see the current date and time displayed on the page. 
+
+That's it! You have created a Django app that displays the current date and time from the server. 
+You can further customize the HTML template to enhance the appearance of the page if needed. 
+-----------------------------------------------------------------------------------------------------------------------
+Using Templates - 
+django-admin startproject myproject
+cd myproject
+python manage.py startapp myapp
+
+Define a View to Get the Current Date and Time
+
+In your app (e.g., myapp), create or edit the views.py file:
+# myapp/views.py
+
+from django.shortcuts import render
+from datetime import datetime
+
+def current_datetime(request):
+    now = datetime.now()
+    return render(request, 'myapp/current_datetime.html', {'current_date_time': now})
+
+Configure URL Routing
+
+In your project's urls.py file, add a URL pattern to route to the current_datetime view:
+
+# myproject/urls.py
+from django.contrib import admin
+from django.urls import path
+from myapp.views import current_datetime
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('datetime/', current_datetime, name='current_datetime'),
+]
+
+Create the Template
+
+Create a directory named templates in your app's directory (myapp), then inside it create another directory named myapp. This directory structure is required for Django to find your templates if you are using the default settings.
+
+Create a file named current_datetime.html inside myapp/templates/myapp/ with the following content:
+
+<!-- myapp/templates/myapp/current_datetime.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Date and Time</title>
+</head>
+<body>
+    <h1>Current Date and Time</h1>
+    <p>The current date and time is: {{ current_date_time }}</p>
+</body>
+</html>
+Run the Server and Access the View
+
+Run your Django development server with:
+python manage.py runserver
+
+Then navigate to http://127.0.0.1:8000/datetime/ in your web browser. You should see the current date and time displayed on the page.
+-----------------------------------------------------------------------------------------------------------------------
+Program 4: - Develop a Django app that displays date and time four hours ahead and four hours before as
+an offset of current date and time in server.
+Only view is changed from program 3.
+View - 
+from django.http import HttpResponse 
+from datetime import datetime, timedelta 
+
+def offset_datetime(request): 
+    now = datetime.now() 
+    offset_before = now - timedelta(hours=4) 
+    offset_after = now + timedelta(hours=4) 
+    html = "<html><body>Current date and time: {0}<br>Offset four hours before: {1}<br>Offset four hours ahead: {2}</body></html>".format(now, offset_before, offset_after) 
+    return HttpResponse(html)
+---------------------------------------------------------------------------------------------------------------------------
+
+Illustration of Dynamic Url and Wild card Patterns - 
+
+View - 
+# myapp/views.py
+from django.shortcuts import render
+from django.http import HttpResponse
+from datetime import datetime, timedelta
+import re
+
+def hours_ahead(request, hours):
+    try:
+        hours = int(hours)
+    except ValueError:
+        return HttpResponse("Invalid value for hours.")
+
+    future_time = datetime.now() + timedelta(hours=hours)
+    return render(request, 'myapp/hours_ahead.html', {'future_time': future_time, 'hours': hours})
+
+Urls - 
+# myproject/urls.py
+from django.contrib import admin
+from django.urls import path, re_path
+from myapp.views import hours_ahead
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    re_path(r'^time/plus/(\d+)/$', hours_ahead, name='hours_ahead'),
+]
+
+Template - 
+<!-- myapp/templates/myapp/hours_ahead.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Ahead</title>
+</head>
+<body>
+    <h1>Time Ahead</h1>
+    <p>In {{ hours }} hour(s), it will be: {{ future_time }}</p>
+    <p>In {{ hours|default_if_none:"00:00:00" }} hour(s), it will be: {{ future_time }}</p>
+</body>
+</html>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Template tags
+
+Create a new template file named offset_datetime.html in your templates directory (e.g., myapp/templates/myapp/offset_datetime.html): 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Offset Datetime</title>
+</head>
+<body>
+    <p>Current date and time: {{ now }}</p>
+    <p>Offset four hours before: {{ offset_before }}</p>
+    <p>Offset four hours ahead: {{ offset_after }}</p>
+
+    {% if now.hour >= 12 %}
+        <p>It's afternoon.</p>
+    {% else %}
+        <p>It's morning.</p>
+    {% endif %}
+</body>
+</html>
+
+
+Update your view to render the template and pass the context: 
+
+from django.shortcuts import render
+from datetime import datetime, timedelta
+
+def offset_datetime(request):
+    now = datetime.now()
+    offset_before = now - timedelta(hours=4)
+    offset_after = now + timedelta(hours=4)
+    context = {
+        'now': now,
+        'offset_before': offset_before,
+        'offset_after': offset_after,
+    }
+    return render(request, 'myapp/offset_datetime.html', context)
+
+
+Ensure your URL configuration routes to the offset_datetime view. In urls.py: 
+
+from django.urls import path
+from .views import offset_datetime
+
+urlpatterns = [
+    path('offset_datetime/', offset_datetime, name='offset_datetime'),
+]
+
+
+
+----------------------------------------------------------------------------------------------
+Develop a simple Django app that displays an unordered list of fruits and ordered list of
+selected students for an event to demonstrate Databases usage
+
+django-admin startproject fruit_student_app
+cd fruit_student_app
+
+python manage.py startapp display
+
+Add the App to Installed Apps:
+Edit fruit_student_app/settings.py:
+
+INSTALLED_APPS = [
+    ...
+    'display',
+]
+Set Up Database:
+Use the default SQLite database or configure another database in settings.py.
+
+Create Models for Fruits and Students:
+Edit display/models.py:
+
+from django.db import models
+
+class Fruit(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+Make Migrations:
+python manage.py makemigrations
+python manage.py migrate
+
+
+Register Models in Admin:
+Edit display/admin.py:
+
+from django.contrib import admin
+from .models import Fruit, Student
+
+admin.site.register(Fruit)
+admin.site.register(Student)
+
+
+Create Superuser:
+
+python manage.py createsuperuser
+
+
+Create Views:
+Edit display/views.py:
+
+from django.shortcuts import render
+from .models import Fruit, Student
+
+def fruit_student_list(request):
+    fruits = Fruit.objects.all()
+    students = Student.objects.all()
+    return render(request, 'display/list.html', {'fruits': fruits, 'students': students})
+
+Create URL Patterns:
+Edit display/urls.py:
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.fruit_student_list, name='fruit_student_list'),
+]
+
+Edit fruit_student_app/urls.py:
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('display.urls')),
+]
+
+
+Create display/templates/display/list.html:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fruits and Students</title>
+</head>
+<body>
+    <h1>Fruits</h1>
+    <ul>
+        {% for fruit in fruits %}
+            <li>{{ fruit.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Selected Students</h1>
+    <ol>
+        {% for student in students %}
+            <li>{{ student.name }}</li>
+        {% endfor %}
+    </ol>
+</body>
+</html>
+
+Add Data through Admin Interface:
+Start the server:
+
+python manage.py runserver
+
+    Log In:
+    Use the superuser credentials you created earlier.
+
+    Add Fruits:
+        Click on the "Fruits" section.
+        Click "Add Fruit".
+        Enter the name of the fruit.
+        Click "Save".
+
+    Add Students:
+        Click on the "Students" section.
+        Click "Add Student".
+        Enter the name of the student.
+        Click "Save".
+
+By following these steps, you can easily add entries to your Fruits and Students models through the Django Admin interface.
+
+View the Lists:
+Visit http://127.0.0.1:8000/ to see the unordered list of fruits and ordered list of students.
+
+
+______________________________________________________________________________________________________
+Develop a Model form for student that contains his topic chosen for project, languages used
+and duration with a model called project.
+
+django-admin startproject myproject
+cd myproject
+django-admin startapp projects
+
+In your projects app, open models.py and define the Project model:
+from django.db import models
+
+class Project(models.Model):
+    TOPIC_CHOICES = [
+        ('web_dev', 'Web Development'),
+        ('data_sci', 'Data Science'),
+        ('ml', 'Machine Learning'),
+        ('ai', 'Artificial Intelligence'),
+        # Add more topics as needed
+    ]
+
+    topic = models.CharField(max_length=100, choices=TOPIC_CHOICES)
+    languages = models.CharField(max_length=200)
+    duration = models.PositiveIntegerField(help_text='Duration in days')
+
+    def __str__(self):
+        return self.topic
+
+In your projects app, create a file called forms.py and define the model form:
+from django import forms
+from .models import Project
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['topic', 'languages', 'duration']
+        widgets = {
+            'topic': forms.Select(choices=Project.TOPIC_CHOICES),
+            'languages': forms.TextInput(attrs={'placeholder': 'e.g., Python, JavaScript'}),
+            'duration': forms.NumberInput(attrs={'min': 1}),
+        }
+
+In your projects app, open views.py and create a view to handle the form:
+
+from django.shortcuts import render, redirect
+from .forms import ProjectForm
+
+def project_create_view(request):
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('project_list')  # Assuming you have a project list view
+    else:
+        form = ProjectForm()
+
+    return render(request, 'projects/project_form.html', {'form': form})
+
+In your projects app, create a directory called templates/projects and then create a file called project_form.html:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Project</title>
+</head>
+<body>
+    <h2>Create a New Project</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+In your projects app, create (or update) the urls.py file and add the URL pattern for the form view:
+
+from django.urls import path
+from .views import project_create_view
+
+urlpatterns = [
+    path('create/', project_create_view, name='project_create'),
+    # Add other URLs as needed
+]
+
+Include your projects app URLs in the main urls.py file of your project:
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('projects/', include('projects.urls')),
+]
+
+Make Migrations:
+python manage.py makemigrations
+python manage.py migrate
+
+Start the server:
+python manage.py runserver
+
+Now you can navigate to http://127.0.0.1:8000/projects/create/ in your web browser to see the form and create a new project entry.
+____________________________________________________________________________________________________________________________
+
+
+
+Develop example Django app that performs CSV and PDF generation for any model 
+
+django-admin startproject myproject
+cd myproject
+python manage.py startapp myapp
+
+Edit myproject/settings.py to include 'myapp' in INSTALLED_APPS.
+
+In myapp/models.py, create a Student model:
+
+from django.db import models
+
+class Student(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    attendance = models.FloatField()
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+In myapp/views.py, create views for generating CSV and PDF files:
+
+import csv
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Student
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from io import BytesIO
+
+def generate_csv(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="students.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['First Name', 'Last Name', 'Email', 'Attendance'])
+
+    students = Student.objects.all().values_list('first_name', 'last_name', 'email', 'attendance')
+    for student in students:
+        writer.writerow(student)
+
+    return response
+
+def generate_pdf(request):
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=letter)
+    width, height = letter
+
+    p.drawString(100, height - 40, "Student List")
+
+    students = Student.objects.all()
+    y = height - 60
+    for student in students:
+        p.drawString(100, y, f"{student.first_name} {student.last_name} - {student.email} - Attendance: {student.attendance}%")
+        y -= 20
+
+    p.showPage()
+    p.save()
+
+    buffer.seek(0)
+    return HttpResponse(buffer, content_type='application/pdf')
+
+In myapp/urls.py, set up the URLs for the CSV and PDF generation views:
+
+from django.urls import path
+from .views import generate_csv, generate_pdf
+
+urlpatterns = [
+    path('generate_csv/', generate_csv, name='generate_csv'),
+    path('generate_pdf/', generate_pdf, name='generate_pdf'),
+]
+
+Include myapp.urls in the main urls.py of the project:
+
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('myapp.urls')),
+]
+
+Register the Student model in myapp/admin.py to manage it via Django admin:
+
+from django.contrib import admin
+from .models import Student
+
+admin.site.register(Student)
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+Visit http://127.0.0.1:8000/generate_csv/ to download the CSV file.
+Visit http://127.0.0.1:8000/generate_pdf/ to download the PDF file.
