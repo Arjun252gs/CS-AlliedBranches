@@ -209,3 +209,37 @@ int main() {
 	}
 	return 0;
 }
+//Program - 11 : Question - Develop a program to find whether a given number is prime or not.
+#include <stdio.h>
+#include <math.h>  
+int isPrime(int number) {
+    if (number <= 1) 
+        return 0; 
+    else if (number == 2)  
+        return 1;  
+    else if (number % 2 == 0) 
+        return 0;  
+    
+    for (int i = 3; i <= sqrt(number); i += 2) {
+        if (number % i == 0) 
+            return 0;  
+    }
+    return 1;
+}
+int main() {
+    int number;
+    int primeFlag; 
+
+    printf("Enter a number: ");
+    scanf("%d", &number);
+
+    primeFlag = isPrime(number);
+
+    if (primeFlag) {
+        printf("%d is a prime number.\n", number);
+    } else {
+        printf("%d is not a prime number.\n", number);
+    }
+    return 0;
+} //https://onecompiler.com/c/445y49x2v
+
