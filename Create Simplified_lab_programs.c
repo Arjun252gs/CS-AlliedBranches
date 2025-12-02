@@ -243,3 +243,71 @@ int main() {
     return 0;
 } //https://onecompiler.com/c/445y49x2v
 
+//Program - 13 : Question - Develop a program to declare the structure of employees and display the employee records with higher salary among two employees.
+struct employee{ 
+		char name[20];
+		int id;
+		int age;
+		int salary; 
+		char dept_name[20];
+   	};
+int main()
+{
+    struct employee e1,e2;
+
+    printf("Enter the details of employee 1:\n");
+    scanf("%s%d%d%d%s", &e1.name, &e1.id, &e1.age, &e1.salary, &e1.dept_name); 
+ 
+    printf("Enter the details of employee 2:\n");
+    scanf("%s%d%d%d%s", &e2.name, &e2.id, &e2.age, &e2.salary, &e2.dept_name); 
+   
+    if(e1.salary > e2.salary)
+		printf("\nSalary of %s is more. \nid = %d, age is%d,  salary =%d, dept =%s\n", e1.name, e1.id, e1.age, e1.salary, e1.dept_name);
+    else
+		printf("\nSalary of %s is more. \nid = %d, age is%d,  salary =%d, dept =%s\n", e2.name, e2.id, e2.age, e2.salary, e2.dept_name);
+    return 0; 
+} // https://onecompiler.com/c/446c7nd7q
+
+//Program - 14 : Question - Develop a program to create an array of structures to store book details and check whether a specific book, as requested by the user, is available or not.
+
+#include<stdio.h>
+#include <string.h>
+struct Book {
+    char title[20];
+    char author[20];
+    int quantity;
+};
+
+int main()
+	{
+    struct Book library[5];
+    const int num_books = 5;
+    char searchTitle[20];
+    int found = 0;
+
+    printf("Enter details for 5 books:\n");   
+    for (int i = 0; i < num_books; ++i) {
+        printf("\nEnter Book %d Title, Author, Quantity", i + 1);
+        scanf("%s%s%d", library[i].title, library[i].author, &library[i].quantity);
+    }
+
+    printf("\n--- Availability Check ---\n");
+    printf("Enter the title you want to check (no spaces): ");
+    scanf("%s", searchTitle);
+    for (int i = 0; i < num_books; ++i) {
+        if (strcmp(library[i].title, searchTitle) == 0) {
+            if (library[i].quantity > 0) {
+                printf("\nYes, '%s' is available in stock.\n", searchTitle);
+                found = 1;
+                break;  
+            } else {
+                printf("\nNo, '%s' is currently out of stock.\n", searchTitle);
+                found = 1;
+                break;  
+            }
+        }
+    }
+    if (!found) 
+        printf("No, '%s' was not found in our catalog.\n", searchTitle);
+    return 0;
+} //https://onecompiler.com/c/446c7wnvx
