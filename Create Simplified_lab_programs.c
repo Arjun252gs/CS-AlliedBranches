@@ -130,9 +130,8 @@ int main() {
 //Program - 8 : Question - Develop a program to find the transpose of a matrix.
 #include<stdio.h>
 int main() {	
-  	int rows, columns;
+  	int rows, columns, i, j, k=1;
 	int matrix[5][5], transpose[5][5];
-  	int i,j,k=1;
   	printf("Enter the number:\n");
   	scanf("%d%d",&rows, &columns);
   	for(i=0; i<rows; i++)   // Reading a matrix
@@ -227,8 +226,7 @@ int isPrime(int number) {
     return 1;
 }
 int main() {
-    int number;
-    int primeFlag; 
+    int number, primeFlag; 
 
     printf("Enter a number: ");
     scanf("%d", &number);
@@ -247,9 +245,7 @@ int main() {
 #include<stdio.h>
 struct employee{ 
 		char name[20];
-		int id;
-		int age;
-		int salary; 
+		int age, id, salary; 
 		char dept_name[20];
    	};
 int main()
