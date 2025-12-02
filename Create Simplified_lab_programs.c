@@ -244,6 +244,7 @@ int main() {
 } //https://onecompiler.com/c/445y49x2v
 
 //Program - 13 : Question - Develop a program to declare the structure of employees and display the employee records with higher salary among two employees.
+#include<stdio.h>
 struct employee{ 
 		char name[20];
 		int id;
